@@ -14,7 +14,7 @@ public class SpringSecurity {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/register").permitAll()
+                .requestMatchers("/register", "/resettingPasswordSendEmail", "/checkAuth").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.awt.*;
-
 @Controller
 public class AuthController {
 
@@ -46,5 +44,18 @@ public class AuthController {
     public String r(@ModelAttribute("userEntity") UserEntity user){
         userService.register(user.getEmail(), user.getPassword());
         return "success";
+    }
+
+    @PostMapping("/resettingPasswordSendEmail")
+    public String resettingPasswordSendEmail(@ModelAttribute("user")UserEntity user){
+        userService.setJavaMailSender(user.getEmail());
+        return "/checkAuth";
+    }
+    @PostMapping("/checkAuth")
+    public String checkAuth(@ModelAttribute("user") UserEntity user, String code){
+        if (user.getPin().equals(code)){
+            return "success";
+        }
+        else return "error";
     }
 }

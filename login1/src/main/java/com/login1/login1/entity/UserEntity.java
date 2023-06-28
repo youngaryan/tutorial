@@ -24,8 +24,16 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
+    private String pin;
+
     public UserEntity(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public UserEntity(String email, String password, String pin) {
+        this.email = email;
+        this.password = password;
+        this.pin = pin;
     }
 }
