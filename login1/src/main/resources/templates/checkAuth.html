@@ -5,6 +5,8 @@
     <title>Title</title>
 </head>
 <body>
+<a href="login.html">login</a>
+<br>
 <h1 >input the code</h1>
 <form th:action="@{/checkAuth}" method="post">
     <div>
@@ -15,5 +17,22 @@
         <button type="submit">check</button>
     </div>
 </form>
+
+
+
+<div th:if="${pinMatches}">
+    <h1>Reset Password</h1>
+    <form th:action="@{/resetPassword}" method="post">
+        <div>
+            <input type="hidden" id="code1" name="code1" th:value="${code}">
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" name="newPassword">
+        </div>
+        <div>
+            <button type="submit">Reset Password</button>
+        </div>
+    </form>
+</div>
+
 </body>
 </html>

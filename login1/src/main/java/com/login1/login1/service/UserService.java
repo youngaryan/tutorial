@@ -5,7 +5,9 @@ import com.login1.login1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Random;
 
@@ -33,22 +35,31 @@ public class UserService {
 
 
     //sending email for resetting passwords
-    public void setJavaMailSender(String emailSendTo){
+    @Transactional
+    public void setJavaMailSender(String emailSendTo)  {
         if (userRepository.existsByEmail(emailSendTo)){
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
             Random random = new Random();
             UserEntity user = userRepository.findByEmail(emailSendTo);
             String r = String.valueOf(random.nextInt(100000));
+            user.setPin(r);
             simpleMailMessage.setFrom("aryangolbaghi@gmail.com");
             simpleMailMessage.setSubject("Authentication");
             simpleMailMessage.setTo(emailSendTo);
-            simpleMailMessage.setText("input the following code "+r);
-            user.setPin(r);
+            simpleMailMessage.setText("input the following code "+r+" expires in 1 min");
             javaMailSender.send(simpleMailMessage);
         }
     }
 
+    //find User by their email
     public UserEntity findByEmail(String email){
         return userRepository.findByEmail(email);
     }
+
+    //find user by their pin
+    public UserEntity findByPin(String pin){return userRepository.findByPin(pin);}
+
+    //boolean existByPin
+    public boolean existByPin(String pin){return userRepository.existsByPin(pin);}
+
 }

@@ -4,10 +4,12 @@ import com.login1.login1.entity.UserEntity;
 import com.login1.login1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AuthController {
@@ -47,15 +49,27 @@ public class AuthController {
     }
 
     @PostMapping("/resettingPasswordSendEmail")
-    public String resettingPasswordSendEmail(@ModelAttribute("user")UserEntity user){
-        userService.setJavaMailSender(user.getEmail());
+    public String resettingPasswordSendEmail(@RequestParam("email") String email, Model model) {
+        UserEntity user = userService.findByEmail(email);
+        userService.setJavaMailSender(email);
+        model.addAttribute("user", user);
         return "/checkAuth";
     }
     @PostMapping("/checkAuth")
-    public String checkAuth(@ModelAttribute("user") UserEntity user, String code){
-        if (user.getPin().equals(code)){
-            return "success";
-        }
-        else return "error";
+    public String checkAuth( @RequestParam("code") String code, Model model) {
+        boolean pinMatches = userService.existByPin(code);
+        model.addAttribute("code",code);
+        model.addAttribute("pinMatches", pinMatches);
+        return "checkAuth";
     }
+
+    @Transactional
+    @PostMapping("/resetPassword")
+    public String resetPass(@RequestParam("code1") String code, @RequestParam("newPassword") String newPass ) {
+        UserEntity user = userService.findByPin(code);
+        user.setPassword(newPass);
+        user.setPin(null);
+        return "success";
+    }
+
 }
