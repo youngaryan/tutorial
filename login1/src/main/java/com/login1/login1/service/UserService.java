@@ -1,6 +1,8 @@
 package com.login1.login1.service;
 
+import com.login1.login1.entity.Role;
 import com.login1.login1.entity.UserEntity;
+import com.login1.login1.repository.RoleRepository;
 import com.login1.login1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -9,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -18,11 +21,20 @@ public class UserService {
     private JavaMailSender javaMailSender;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
-    public void register(String userName, String password){
-        userRepository.save(new UserEntity(userName,password));
+    public void register(String userName, String password, String role){
+        Role role1 = new Role(role);
+        roleRepository.save(role1);
+
+        UserEntity user = new UserEntity(userName,password);
+        user.addRole(role1);
+        userRepository.save(user);
     }
 
+    //returnAllUsers
+    public List<UserEntity> findAllUsers(){return userRepository.findAll();}
 
     //checking user login details
     public boolean checkLogIn(String userName, String password) {

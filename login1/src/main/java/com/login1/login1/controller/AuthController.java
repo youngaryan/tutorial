@@ -1,8 +1,11 @@
 package com.login1.login1.controller;
 
+import com.login1.login1.entity.Role;
 import com.login1.login1.entity.UserEntity;
+import com.login1.login1.repository.RoleRepository;
 import com.login1.login1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -11,14 +14,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class AuthController {
 
     @Autowired
     private UserService userService;
 
+
     @GetMapping("/index")
-    public String showHomePage() {
+    public String showHomePage(Model model) {
+        List<UserEntity> allUsers = userService.findAllUsers();
+        model.addAttribute("users",allUsers);
         return "index";
     }
 
@@ -43,8 +51,9 @@ public class AuthController {
         return "register";
     }
     @PostMapping("/register")
-    public String r(@ModelAttribute("userEntity") UserEntity user){
-        userService.register(user.getEmail(), user.getPassword());
+    public String r(@ModelAttribute("userEntity") UserEntity user, @RequestParam("myRadio") String role){
+
+        userService.register(user.getEmail(), user.getPassword(), role);
         return "success";
     }
 

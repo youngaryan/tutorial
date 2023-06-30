@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -26,6 +29,14 @@ public class UserEntity {
 
     private String pin;
 
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_entity_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id")
+    )
+    private Set<Role> roles = new HashSet<>();
+
     public UserEntity(String email, String password) {
         this.email = email;
         this.password = password;
@@ -35,5 +46,9 @@ public class UserEntity {
         this.email = email;
         this.password = password;
         this.pin = pin;
+    }
+
+    public void addRole(Role role){
+        this.roles.add(role);
     }
 }
