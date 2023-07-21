@@ -1,4 +1,4 @@
-package registration;
+package com.loginTut.loginTut.registration;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

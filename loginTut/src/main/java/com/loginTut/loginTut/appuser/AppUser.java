@@ -1,4 +1,4 @@
-package appuser;
+package com.loginTut.loginTut.appuser;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;

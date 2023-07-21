@@ -1,4 +1,4 @@
-package appuser;
+package com.loginTut.loginTut.appuser;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

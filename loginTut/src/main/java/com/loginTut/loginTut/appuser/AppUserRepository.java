@@ -1,4 +1,4 @@
-package appuser;
+package com.loginTut.loginTut.appuser;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
