@@ -4,6 +4,15 @@
         <title>Conditionals</title>
     </head>
     <body>
-                
+                <!-- <h1 th:if = "${books > 10}">enough books in stock</h1>
+                <h1 th:unless = "${books > 10}">not enough books in stock</h1> -->
+
+                <h1 th:text = "${books > 10} ? 'enough books in stock' : 'not enough books in the stock.'"></h1>
+
+                <div th:switch = "${product}">
+                    <h3 th:case = "'TedLasso'">ted lasso: 9.9</h3>
+                    <h3 th:case = "'mr.robot'">mr robot: 8.8</h3>
+                    <h3 th:case = "*">defult: 10</h3>
+                </div>
     </body>
 </html>
