@@ -5,6 +5,6 @@
         <title>Utility Methods</title>
     </head>
     <body>
-        <h1></h1>  
+        <h1 th:text="${#strings.contains(menu, 'rrice')} ? 'it has rice' : 'it doesn\'t have rice '"></h1>  
     </body>
 </html>
