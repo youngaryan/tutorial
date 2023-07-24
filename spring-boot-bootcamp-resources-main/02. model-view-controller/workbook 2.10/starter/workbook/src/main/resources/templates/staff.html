@@ -5,5 +5,18 @@
     </head>
     <body>
         <h2>Staff List</h2>
+
+        <table border="solid" width="800px">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Role</th>
+            </tr>
+            <tr th:each="em : ${staff}">
+                <td th:text="${em.name}"></td>
+                <td th:text="${em.age}"></td>
+                <td th:text="${em.role}"></td>
+            </tr>
+        </table>
     </body>
 </html>
