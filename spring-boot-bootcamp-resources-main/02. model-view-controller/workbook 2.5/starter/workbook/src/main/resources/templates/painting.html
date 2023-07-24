@@ -3,6 +3,17 @@
     <head>
         <title>Painting</title>
     </head>
-    <body>               
+    <body>   
+        <div th:switch = ${painting}>
+            <h1 th:text = "${painting}"></h1>
+            <div th:case ="'mona-lisa'">
+                <img src="images\mona-lisa.jpeg" width="300px">
+            </div>
+            <div th:case="'starry-night'">
+                <h1></h1>
+                <img src="images\starry-night.jpeg" width="300px">
+            </div>
+            <h1 th:case="*">defult</h1>
+        </div>            
     </body>
 </html>
