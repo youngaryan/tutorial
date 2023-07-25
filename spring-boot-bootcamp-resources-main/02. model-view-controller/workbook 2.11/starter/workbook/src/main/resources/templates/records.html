@@ -13,7 +13,7 @@
                 <th>Cost</th>
                 <th>Profit</th>
             </tr>
-            <tr th:each="item : ${records}" th:style="${item.revenue - item.cost >= 0}? 'background-color: green' : 'background-color: red'">
+            <tr th:each="item : ${records}" th:style="${item.revenue - item.cost > 0}? 'background-color: green' : 'background-color: red'">
                 <td th:text="${item.item}"></td>
                 <td th:text="${#numbers.formatCurrency(item.revenue)}"></td>
                 <td th:text="${#numbers.formatCurrency(item.cost)}"></td>
