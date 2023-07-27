@@ -1,23 +1,26 @@
 package com.ltp.globalsuperstore;
 
+import java.util.UUID;
 
 public class Products {
+    private String id;
     private String categoriy;
     private String name;
     private String price;
     private String discount;
     private String orderDate;
 
-
-    public Products() {
+    public String getId() {
+        return this.id;
     }
 
-    public Products(String categoriy, String name, String price, String discount, String orderDate) {
-        this.categoriy = categoriy;
-        this.name = name;
-        this.price = price;
-        this.discount = discount;
-        this.orderDate = orderDate;
+
+    public Products() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 
@@ -71,6 +74,5 @@ public class Products {
             ", orderDate='" + getOrderDate() + "'" +
             "}";
     }
-
   
 }

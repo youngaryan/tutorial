@@ -9,7 +9,8 @@
         </div>
    
         <div class="container">
-           <table >
+         <p th:style="${message != null} ? 'background-color: green;' : ''" th:text="${message}"></p>
+         <table >
               <tr class="head">
                  <th>Category</th>
                  <th>Product Name</th>
@@ -25,7 +26,7 @@
                  <td type="currency" th:text="${order.discount}"></td>
                  <td type="date" th:text="${order.orderDate}"></td>
                  <td>
-                    <a role="button" style="color:white; background-color: #263238" class="table-button">Update</a>
+                    <a th:href="@{/(id = ${order.id})}" role="button" style="color:white; background-color: #263238" class="table-button">Update</a>
                  </td>
               </tr>
            </table>
