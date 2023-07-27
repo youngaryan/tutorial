@@ -1,6 +1,9 @@
 package com.ltp.globalsuperstore;
 
+import java.util.Date;
 import java.util.UUID;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Products {
     private String id;
@@ -8,7 +11,9 @@ public class Products {
     private String name;
     private String price;
     private String discount;
-    private String orderDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date orderDate;
+    
 
     public String getId() {
         return this.id;
@@ -56,13 +61,15 @@ public class Products {
         this.discount = discount;
     }
 
-    public String getOrderDate() {
+
+    public Date getOrderDate() {
         return this.orderDate;
     }
 
-    public void setOrderDate(String orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
+    
 
     @Override
     public String toString() {
