@@ -1,7 +1,6 @@
 package com.ltp.globalsuperstore;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -13,15 +12,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class StoreController {
-    static List<String> categories = Arrays.asList(Constants.CATEGORIES);
     static List<Products> orders = new ArrayList<>();
 
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String id){
         int index = getProductIndex(id);
 
-        model.addAttribute("product", index == -1 ? new Products() : orders.get(index));
-        model.addAttribute("cats", categories);
+        model.addAttribute("product", index == Constants.NOT_FOUND ? new Products() : orders.get(index));
+        model.addAttribute("cats", Constants.CATEGORIES);
         return "form";
     }
 
@@ -29,7 +27,7 @@ public class StoreController {
     public String handleFormPost(Products products, RedirectAttributes redirectAttributes){
         int index = getProductIndex(products.getId());
 
-        if(index == -1){
+        if(index == Constants.NOT_FOUND){
             orders.add(products);   
         }else{
             products.setId(orders.get(index).getId());
@@ -50,6 +48,6 @@ public class StoreController {
         for(int i = 0; i < orders.size(); i++){
             if(orders.get(i).getId().equals(id))return i;
         }
-        return -1;
+        return Constants.NOT_FOUND;
     }
 }
