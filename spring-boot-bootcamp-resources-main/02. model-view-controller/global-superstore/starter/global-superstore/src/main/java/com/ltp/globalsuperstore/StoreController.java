@@ -1,7 +1,9 @@
 package com.ltp.globalsuperstore;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,15 +28,17 @@ public class StoreController {
     @PostMapping("/proccess")
     public String handleFormPost(Products products, RedirectAttributes redirectAttributes){
         int index = getProductIndex(products.getId());
+        String status = Constants.SUCCESS_STATUS;
 
         if(index == Constants.NOT_FOUND){
             orders.add(products);   
-        }else{
-            products.setId(orders.get(index).getId());
+        }else if(within5Days(products.getOrderDate(), orders.get(index).getOrderDate())){
             orders.set(index, products);
+        }else{
+            status = Constants.FAILED_STATUS;
         }
         
-        redirectAttributes.addFlashAttribute("message", "You have successfully submited the item.");
+        redirectAttributes.addFlashAttribute("status", status);
         return "redirect:/inventory";
     }
 
@@ -50,4 +54,9 @@ public class StoreController {
         }
         return Constants.NOT_FOUND;
     }
+    public boolean within5Days(Date newDate, Date oldDate) {
+        long diff = Math.abs(newDate.getTime() - oldDate.getTime());
+        return (int) (TimeUnit.MILLISECONDS.toDays(diff)) <= 5;
+    }
+
 }
