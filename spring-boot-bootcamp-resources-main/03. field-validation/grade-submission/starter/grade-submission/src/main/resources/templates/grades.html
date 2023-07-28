@@ -22,7 +22,7 @@
         <tr th:each="grade: ${grades}">
           <td th:text="${grade.name}"></td>
           <td th:text="${grade.subject}"></td>
-          <td th:text="${grade.score}"></td>
+          <td th:text="${#strings.toUpperCase(grade.score)}"></td>
           <td> <a role="button" class="update" th:href="@{/(id = ${grade.id})}">Update</a> </td>
         </tr>
       </table>
