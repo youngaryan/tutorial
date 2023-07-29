@@ -19,7 +19,11 @@ public class JavagramController {
 
     @PostMapping("/submitItem")
         public String handleForm(@Valid User user, BindingResult result){
-            if(result.hasErrors() == true) return "/sign-up";
+            if(user.getFirstName().equalsIgnoreCase(user.getLastName()))result.rejectValue("lastName", "","please enter valid data.");
+            if(result.hasErrors() == true){
+                return "/sign-up";
+            }
+
 
             return "redirect:/result";
         }

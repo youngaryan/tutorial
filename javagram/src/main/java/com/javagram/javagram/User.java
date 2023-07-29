@@ -20,6 +20,7 @@ public class User {
 
     @NotBlank(message = "Username must not be blank.")
     @Size(min = 6, message = "Username Must be Longer than 6 charachters.")
+    @Username(message = "Cannot contain special characters or uppercase characters ")
     private String userName;
 
     @Email(message = "Email is not in a correct form.")
@@ -27,6 +28,7 @@ public class User {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past
+    @Age(message = "You must be oler than 18.")
     private Date dateOfBirth;
 
     public User(String firstName, String lastName, String userName, String email, Date dateOfBirth) {
