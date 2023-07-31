@@ -5,8 +5,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,12 +24,17 @@ public class StoreController {
     public String getForm(Model model, @RequestParam(required = false) String id) {
         int index = getIndexFromId(id);
         model.addAttribute("item", index == Constants.NOT_FOUND ? new Item() : items.get(index));
-        model.addAttribute("categories", Constants.CATEGORIES);
         return "form";
     }
 
     @PostMapping("/submitItem")
-    public String handleSubmit(Item item, RedirectAttributes redirectAttributes) {
+    public String handleSubmit(@Valid Item item, BindingResult result, RedirectAttributes redirectAttributes) {
+        if(item.getPrice() < item.getDiscount()){
+            result.rejectValue("discount", "", null, "Discount can't be more than the price.");
+        }
+        if(result.hasErrors()) {
+            return "/form";
+        }
         int index = getIndexFromId(item.getId());
         String status = Constants.SUCCESS_STATUS;
         if (index == Constants.NOT_FOUND) {
@@ -43,7 +51,7 @@ public class StoreController {
     @GetMapping("/inventory")
     public String getInventory(Model model) {
         model.addAttribute("items", items);
-        return "inventory";
+        return "/inventory";
     }
 
     public int getIndexFromId(String id) {
