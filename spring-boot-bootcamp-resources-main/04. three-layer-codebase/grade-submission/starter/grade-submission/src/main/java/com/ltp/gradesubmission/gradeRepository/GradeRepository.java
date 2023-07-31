@@ -7,14 +7,22 @@ import com.ltp.gradesubmission.Grade;
 
 public class GradeRepository {
 
-    public List<Grade> getStudentGrades() {
-        return this.studentGrades;
-    }
-
-    public void setStudentGrades(List<Grade> studentGrades) {
-        this.studentGrades = studentGrades;
-    }
-
     private List<Grade> studentGrades = new ArrayList<>();
+
+     public Grade getGrades(int index){
+        return studentGrades.get(index);
+    } 
+
+    public void addGrade(Grade grade){
+        studentGrades.add(grade);;
+    }
+
+    public void updateGrade(Grade grade, int index){
+        studentGrades.set(index, grade);
+    }
+
+    public List<Grade> allGrades(){
+        return studentGrades;
+    } 
 
 }
