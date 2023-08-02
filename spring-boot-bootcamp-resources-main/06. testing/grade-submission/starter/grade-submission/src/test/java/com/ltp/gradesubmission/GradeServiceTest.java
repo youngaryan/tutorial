@@ -38,7 +38,6 @@ public class GradeServiceTest {
 
         assertEquals("Math", result.get(0).getSubject());
         assertEquals("D", result.get(1).getScore());
-        
     }
 
     @Test
