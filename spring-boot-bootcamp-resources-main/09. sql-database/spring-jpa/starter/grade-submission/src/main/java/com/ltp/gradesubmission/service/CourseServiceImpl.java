@@ -2,8 +2,11 @@ package com.ltp.gradesubmission.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.ltp.gradesubmission.entity.Course;
 
+@Service
 public class CourseServiceImpl implements CourseService {
 
     @Override
@@ -17,7 +20,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void deleteCourse(Long id) {        
+    public void deleteCourse(Long id) {
     }
 
     @Override
