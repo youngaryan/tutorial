@@ -19,12 +19,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudent(Long id) {
         Optional<Student> student = studentRepository.findById(id);
-        if (student.isPresent()) {
-            return student.get();
-        } else {
-            throw new StudentNotFoundException(id);
-        }
-
+        return unwrapStudent(student, id);
     }
 
     @Override
@@ -42,4 +37,10 @@ public class StudentServiceImpl implements StudentService {
 
     }
 
+    static Student unwrapStudent(Optional<Student> studentOptional, Long id) {
+        if (studentOptional.isPresent())
+            return studentOptional.get();
+        else
+            throw new StudentNotFoundException(id);
+    }
 }
