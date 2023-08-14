@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ltp.gradesubmission.entity.Course;
 import com.ltp.gradesubmission.entity.Grade;
 import com.ltp.gradesubmission.entity.Student;
-import com.ltp.gradesubmission.exeption.CourseNotFoundException;
 import com.ltp.gradesubmission.exeption.GradeNotFoundException;
-import com.ltp.gradesubmission.exeption.StudentNotFoundException;
 import com.ltp.gradesubmission.repository.CourseRepository;
 import com.ltp.gradesubmission.repository.GradeRepository;
 import com.ltp.gradesubmission.repository.StudentRepository;
@@ -49,8 +47,6 @@ public class GradeServiceImpl implements GradeService {
         grade.setScore(score);
         gradeRepository.save(grade);
         return grade;
-    }
-
     }
 
     @Override
