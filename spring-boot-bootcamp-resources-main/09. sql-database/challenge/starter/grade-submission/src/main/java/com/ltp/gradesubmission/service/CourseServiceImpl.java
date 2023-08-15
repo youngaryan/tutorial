@@ -7,6 +7,7 @@ import com.ltp.gradesubmission.entity.Course;
 import com.ltp.gradesubmission.entity.Student;
 import com.ltp.gradesubmission.exception.CourseNotFoundException;
 import com.ltp.gradesubmission.repository.CourseRepository;
+import com.ltp.gradesubmission.repository.StudentRepository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,9 @@ import org.springframework.stereotype.Service;
 public class CourseServiceImpl implements CourseService {
 
     CourseRepository courseRepository;
-    
+
+    StudentRepository studentRepository;
+
     @Override
     public Course getCourse(Long id) {
         Optional<Course> course = courseRepository.findById(id);
@@ -29,31 +32,35 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void deleteCourse(Long id) {  
-        courseRepository.deleteById(id);      
+    public void deleteCourse(Long id) {
+        courseRepository.deleteById(id);
     }
 
     @Override
     public List<Course> getCourses() {
-        return (List<Course>)courseRepository.findAll();
+        return (List<Course>) courseRepository.findAll();
     }
 
     @Override
     public Course addStudentToCourse(Long studentId, Long courseId) {
-        // TODO Auto-generated method stub
-        return null;
+        Course course = unwrapCourse(courseRepository.findById(courseId), courseId);
+        Student student = StudentServiceImpl.unwrapStudent(studentRepository.findById(studentId), studentId);
+
+        course.getStudents().add(student);
+
+        return courseRepository.save(course);
     }
 
     @Override
     public List<Student> getEnrolledStudents(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        return studentRepository.findAllByCoursesId(id);
     }
 
-    static Course unwrapCourse(Optional<Course> entity, Long id) {
-        if (entity.isPresent()) return entity.get();
-        else throw new CourseNotFoundException(id);
+    static Course unwrapCourse(Optional<Course> entity, Long courseId) {
+        if (entity.isPresent())
+            return entity.get();
+        else
+            throw new CourseNotFoundException(courseId);
     }
-
 
 }

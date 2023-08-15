@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ltp.gradesubmission.entity.Course;
 import com.ltp.gradesubmission.entity.Student;
 import com.ltp.gradesubmission.exception.StudentNotFoundException;
+import com.ltp.gradesubmission.repository.CourseRepository;
 import com.ltp.gradesubmission.repository.StudentRepository;
 
 import lombok.AllArgsConstructor;
@@ -16,8 +17,9 @@ import lombok.AllArgsConstructor;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-
     StudentRepository studentRepository;
+
+    CourseRepository courseRepository;
 
     @Override
     public Student getStudent(Long id) {
@@ -31,24 +33,25 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void deleteStudent(Long id) {      
-        studentRepository.deleteById(id);  
+    public void deleteStudent(Long id) {
+        studentRepository.deleteById(id);
     }
 
     @Override
     public List<Student> getStudents() {
-        return (List<Student>)studentRepository.findAll();
+        return (List<Student>) studentRepository.findAll();
     }
 
     @Override
     public List<Course> getEnrolledCourses(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        return courseRepository.findAllByStudentsId(id);
     }
 
     static Student unwrapStudent(Optional<Student> entity, Long id) {
-        if (entity.isPresent()) return entity.get();
-        else throw new StudentNotFoundException(id);
+        if (entity.isPresent())
+            return entity.get();
+        else
+            throw new StudentNotFoundException(id);
     }
 
 }
