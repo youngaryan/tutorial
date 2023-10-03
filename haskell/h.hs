@@ -1,22 +1,21 @@
 main :: IO ()
-main = putStrLn (show (firstWord ("the trickier test string")))
+main = putStrLn (show (safeTail ("the trickier test string")))
 
 
+safeTail :: [a] -> [a]
+safeTail[] = []
+safeTail (x:xs) = xs
+-- safeTail x = if null x then
+--         []
+--     else
+--         tail x
+-- safeTail a = tail a
+-- safeTail [] = []
 
 
+-- firstWord :: String -> String
 
-firstWord :: String -> String
-
-firstWord x = head(words x)
-
-
-
-
-
-
-
-
-
+-- firstWord x = head(words x)
 
 -- eq :: Floating a => (a, a, a, a) -> a
 
