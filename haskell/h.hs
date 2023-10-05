@@ -1,16 +1,57 @@
 --import Data.Char (toUpper)
 main :: IO ()
-main = putStrLn (show (roots test))
+main = putStrLn (show ( luhn 4 7 8 3))
 
+
+
+--uhnDouble 
+
+uhnDouble :: Int -> Int
+uhnDouble x = if  x*2 > 9 then
+    x*2 - 9
+    else
+    x*2
+
+luhn :: Int -> Int -> Int -> Int -> Bool
+
+luhn a b c d = (uhnDouble a + uhnDouble c + b + d) `mod` 10 == 0
+-- pyths 
+
+-- pyths :: Int -> [(Int, Int, Int)]
+
+-- pyths x = [(i,j,k)| i <- [1,2..x], j <- [1,2..x], k <- [1,2..x], i^2 + j^2 == k^2 ]
+
+
+
+
+
+-- predict 
+
+
+-- test = [10..1]
+-- test = [1.2,0.9..0]
+-- test = [0.1..1]
+-- test = [-1..1]
+
+
+
+-- --oddItems 
+-- isOdd:: Int -> Bool
+-- isOdd x = x `mod` 2 == 1
+
+-- oddItems :: [Int] -> [Int]
+-- oddItems x = filter isOdd x
+
+-- test = [2,4,6,8,10, 11]
 --roots 
-test = (1,-12,36)
-roots :: (Float, Float, Float) -> (Float, Float)
-roots (a, b, c)= 
-    if disc >= 0
-        then ((-b + sqrt disc) / (2*a), (-b - sqrt disc) / (2*a))
-        else (-10, -10)
-    where 
-        disc = b^2 - 4*a*c
+-- test = (1,-12,36)
+-- roots :: (Float, Float, Float) -> (Float, Float)
+-- roots (a, b, c)= 
+--     if disc >= 0
+--         then ((-b + sqrt disc) / (2*a), (-b - sqrt disc) / (2*a))
+--         else (-10, -10)
+--     where 
+--         disc = b^2 - 4*a*c
 
 
 --capitalizeStart 
