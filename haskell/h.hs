@@ -1,8 +1,26 @@
 --import Data.Char (toUpper)
 main :: IO ()
-main = putStrLn (show ( luhn 4 7 8 3))
+main = putStrLn  (show(choose records))
+
+records = [(True,5), (False,7), (True,12), (True,8), (False,15), (True,4)]
+
+choose :: (Ord a, Num a) => [(Bool, a)] -> [(Bool, a)]
+choose xs = filter(\(x1, x2) -> x1 == True && x2 < 10) xs
+-- choose records should return
+-- [(True,5),(True,8),(True,4)
+--week 3
 
 
+-- main = putStrLn  $ (\ x-> if x `mod` 2 ==0 || any(\ y->x `mod` y==0)[2..x-2] 
+--     then "False"
+--     else "True") (10)
+
+-- main = putStrLn  $  (\ x -> show (x-1)) (10)
+-- main = putStrLn  $ (\ (_:xs) ->  xs) ['a','b','s']
+
+-- main = putStrLn  $ (\ x -> show (x+1) )(10)
+
+--week 2
 
 --uhnDouble 
 
