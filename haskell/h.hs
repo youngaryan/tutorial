@@ -1,15 +1,43 @@
 --import Data.Char (toUpper)
 main :: IO ()
-main = putStrLn  (show(choose records))
+main = putStrLn  (show(eqc 6 27))
 
-records = [(True,5), (False,7), (True,12), (True,8), (False,15), (True,4)]
 
-choose :: (Ord a, Num a) => [(Bool, a)] -> [(Bool, a)]
-choose xs = filter(\(x1, x2) -> x1 == True && x2 < 10) xs
--- choose records should return
--- [(True,5),(True,8),(True,4)
+
+
 --week 3
+-- eqc :: Eq Int => Int -> Int -> Int
 
+-- eqc x y 
+--     | p == 0 = y
+--     | otherwise = eqc y p
+--      where p = x `mod` y
+
+
+-- indices :: Eq a => a -> [a] -> [Int]
+
+-- indices n xs= [i |(x,i) <- zip xs[0..] , x == n]
+
+
+-- nth :: Int -> [a] -> a
+-- nth 0 (x:xs) = x
+-- nth n (x:xs) = nth(n-1)xs
+-- nth _ []=error"empty list"
+
+
+
+-- fac :: Int -> Int
+-- fac x
+--     | x < 0 = error"factorial is undefined for x < 0"
+--     | otherwise =  product[1..x]
+-- sq :: [Int] -> [Int]
+-- sq xs = map(\x->x^2)(filter even xs)
+
+-- records = [(True,5), (False,7), (True,12), (True,8), (False,15), (True,4)]
+
+-- choose :: (Ord a, Num a) => [(Bool, a)] -> [(Bool, a)]
+-- choose xs = filter(\(x1, x2) -> x1 == True && x2 < 10) xs
+-- choose records should return
 
 -- main = putStrLn  $ (\ x-> if x `mod` 2 ==0 || any(\ y->x `mod` y==0)[2..x-2] 
 --     then "False"
@@ -24,15 +52,15 @@ choose xs = filter(\(x1, x2) -> x1 == True && x2 < 10) xs
 
 --uhnDouble 
 
-uhnDouble :: Int -> Int
-uhnDouble x = if  x*2 > 9 then
-    x*2 - 9
-    else
-    x*2
+-- uhnDouble :: Int -> Int
+-- uhnDouble x = if  x*2 > 9 then
+--     x*2 - 9
+--     else
+--     x*2
 
-luhn :: Int -> Int -> Int -> Int -> Bool
+-- luhn :: Int -> Int -> Int -> Int -> Bool
 
-luhn a b c d = (uhnDouble a + uhnDouble c + b + d) `mod` 10 == 0
+-- luhn a b c d = (uhnDouble a + uhnDouble c + b + d) `mod` 10 == 0
 -- pyths 
 
 -- pyths :: Int -> [(Int, Int, Int)]
@@ -139,7 +167,7 @@ luhn a b c d = (uhnDouble a + uhnDouble c + b + d) `mod` 10 == 0
 -- halve :: [a] -> ([a],[a])
 
 
--- halve xs = splitAt(length xs `div` 2) xs
+-- halve xs = splitAt(l xs `div` 2) xs
 
 -- xs :: [Int]
 -- xs = [1, 2, 3, 4, 5]
@@ -153,13 +181,13 @@ luhn a b c d = (uhnDouble a + uhnDouble c + b + d) `mod` 10 == 0
 -- palin xs = reverse xs == xs
 -- twice f x = f (f x)
 
--- n = a `div` length xs
+-- n = a `div` l xs
 --     where 
 --         a = 10
 --         xs = [1,2,3,4,5]
 
 
--- N = a 'div' length xs
+-- N = a 'div' l xs
 -- where
 -- a = 10
 -- xs = [1, 2, 3, 4, 5]
