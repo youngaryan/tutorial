@@ -1,30 +1,63 @@
---import Data.Char (toUpper)
+-- import Data.Char (toUpper)
 main :: IO ()
-main = putStrLn  (show(eqc 6 27))
+main = print (perfects 500)
 
+-- week 3
+-- facSum :: Int -> Int
+-- facSum n =
+--   sum
+--     [i| i<-[1..n-1] , n `mod` i == 0]
 
+-- perfects :: Int -> [Int]
 
+-- perfects n = [i| i<-[1..n], facSum i == i]
 
---week 3
+-- grid :: Int -> Int -> [(Int, Int)]
+-- grid x y = [(i, j) | i <- [0 .. x], j <- [0 .. y]]
+
+-- range1 :: [(String, Int)] -> (Int, Int, Int, Int, Int, Int)
+-- range1 grades = foldr countG (0, 0, 0, 0, 0, 0) grades
+--   where
+--     countG :: (String, Int) -> (Int, Int, Int, Int, Int, Int) -> (Int, Int, Int, Int, Int, Int)
+--     countG (_, g) (a, b, c, d, e, f)
+--       | g < 30 = (a + 1, b, c, d, e, f)
+--       | g < 40 = (a, b + 1, c, d, e, f)
+--       | g < 50 = (a, b, c + 1, d, e, f)
+--       | g < 60 = (a, b, c, d + 1, e, f)
+--       | g < 70 = (a, b, c, d, e + 1, f)
+--       | otherwise = (a, b, c, d, e, f + 1)
+
+-- z :: [a] -> [b] -> [(a, b)]
+-- z _ [] = []
+-- z [] _ = []
+-- z (x : xs) (y : ys) = (x, y) : z xs ys
+-- last1 :: [a] -> a
+-- last1 [x] = x
+-- last1 (x : xs) = last1 xs
+
+-- take1 :: Int -> [a] -> [a]
+-- take1 _ [] = []
+-- take1 0 _ = []
+-- take1 s (x : xs) = x : take1 (s - 1) xs
+
+-- s :: [Int] -> Int
+-- s [] = 0
+-- s (x : xs) = x + s xs
 -- eqc :: Eq Int => Int -> Int -> Int
 
--- eqc x y 
+-- eqc x y
 --     | p == 0 = y
 --     | otherwise = eqc y p
 --      where p = x `mod` y
-
 
 -- indices :: Eq a => a -> [a] -> [Int]
 
 -- indices n xs= [i |(x,i) <- zip xs[0..] , x == n]
 
-
 -- nth :: Int -> [a] -> a
 -- nth 0 (x:xs) = x
 -- nth n (x:xs) = nth(n-1)xs
 -- nth _ []=error"empty list"
-
-
 
 -- fac :: Int -> Int
 -- fac x
@@ -39,7 +72,7 @@ main = putStrLn  (show(eqc 6 27))
 -- choose xs = filter(\(x1, x2) -> x1 == True && x2 < 10) xs
 -- choose records should return
 
--- main = putStrLn  $ (\ x-> if x `mod` 2 ==0 || any(\ y->x `mod` y==0)[2..x-2] 
+-- main = putStrLn  $ (\ x-> if x `mod` 2 ==0 || any(\ y->x `mod` y==0)[2..x-2]
 --     then "False"
 --     else "True") (10)
 
@@ -48,9 +81,9 @@ main = putStrLn  (show(eqc 6 27))
 
 -- main = putStrLn  $ (\ x -> show (x+1) )(10)
 
---week 2
+-- week 2
 
---uhnDouble 
+-- uhnDouble
 
 -- uhnDouble :: Int -> Int
 -- uhnDouble x = if  x*2 > 9 then
@@ -61,27 +94,20 @@ main = putStrLn  (show(eqc 6 27))
 -- luhn :: Int -> Int -> Int -> Int -> Bool
 
 -- luhn a b c d = (uhnDouble a + uhnDouble c + b + d) `mod` 10 == 0
--- pyths 
+-- pyths
 
 -- pyths :: Int -> [(Int, Int, Int)]
 
 -- pyths x = [(i,j,k)| i <- [1,2..x], j <- [1,2..x], k <- [1,2..x], i^2 + j^2 == k^2 ]
 
-
-
-
-
--- predict 
-
+-- predict
 
 -- test = [10..1]
 -- test = [1.2,0.9..0]
 -- test = [0.1..1]
 -- test = [-1..1]
 
-
-
--- --oddItems 
+-- --oddItems
 -- isOdd:: Int -> Bool
 -- isOdd x = x `mod` 2 == 1
 
@@ -89,59 +115,53 @@ main = putStrLn  (show(eqc 6 27))
 -- oddItems x = filter isOdd x
 
 -- test = [2,4,6,8,10, 11]
---roots 
+-- roots
 -- test = (1,-12,36)
 -- roots :: (Float, Float, Float) -> (Float, Float)
--- roots (a, b, c)= 
+-- roots (a, b, c)=
 --     if disc >= 0
 --         then ((-b + sqrt disc) / (2*a), (-b - sqrt disc) / (2*a))
 --         else (-10, -10)
---     where 
+--     where
 --         disc = b^2 - 4*a*c
 
-
---capitalizeStart 
+-- capitalizeStart
 
 -- capitalizeStart :: String -> String
--- capitalizeStart [] = [] 
+-- capitalizeStart [] = []
 -- capitalizeStart (x:xs) = toUpper x : xs
 -- test = "hello hjm"
 
---halves 
+-- halves
 -- halves :: [Int] -> [Int]
 -- halves[] = []
 -- halves (x:xs) = x `div` 2 : halves xs
 
 -- test = [2,4,6,8,10]
 
---addc 
+-- addc
 -- addc :: Char -> String -> String
 -- addc c s = [c] ++ s
 
-
--- --range 
+-- --range
 -- range :: Int -> Bool
 -- range x = if x <= 20 && x>=1 then
 --     True
 --     else
 --     False
 
+-- test :: [Int]
 
-
-
---test :: [Int]
-
-
---stack
+-- stack
 -- test = [1,2,3,4,5]
 -- stack :: a ->[a] -> [a]
 -- stack h [] = [h]
 -- stack h (x:xs) = xs ++ [h]
 
- --stack takes the first element of a list and puts it on the end of a list
+-- stack takes the first element of a list and puts it on the end of a list
 
---[1,2,3,4,5]
---[2,3,4,5,1]
+-- [1,2,3,4,5]
+-- [2,3,4,5,1]
 
 -- safeTail :: [a] -> [a]
 -- safeTail[] = []
@@ -161,18 +181,12 @@ main = putStrLn  (show(eqc 6 27))
 
 -- eq (x1,y1,x2,y2) = (sqrt((x2 - x1)^2 + (y2 - y1)^2))
 
-
-
-
 -- halve :: [a] -> ([a],[a])
-
 
 -- halve xs = splitAt(l xs `div` 2) xs
 
 -- xs :: [Int]
 -- xs = [1, 2, 3, 4, 5]
-
-
 
 -- second xs = head (tail xs)
 -- swap (x,y) = (y,x)
@@ -182,10 +196,9 @@ main = putStrLn  (show(eqc 6 27))
 -- twice f x = f (f x)
 
 -- n = a `div` l xs
---     where 
+--     where
 --         a = 10
 --         xs = [1,2,3,4,5]
-
 
 -- N = a 'div' l xs
 -- where
