@@ -1,6 +1,43 @@
--- import Data.Char (toUpper)
 main :: IO ()
-main = print (perfects 500)
+main = print (mystery [1, 2, 3])
+
+mystery xs = foldr (++) [] (map sing xs)
+  where
+    sing x = [x]
+
+-- week 4
+-- a . map (+ 3) xs
+-- b . filter (> 7) xs
+-- c . concat (map (\x -> map (\y -> (x, y)) ys) xs)
+-- d . filter (> 3) (map (\(x, y) -> x + y) xys)
+
+-- filterTupple :: [(Int, Int)] -> [Int]
+-- filterTupple xys = [x + y | (x, y) <- xys, x + y > 3]
+
+-- concat11 :: [a] -> [b] -> [(a, b)]
+-- concat11 (x : xs) (y : ys) = [(a, b) | a <- x : xs, b <- y : ys]
+
+-- filterLessThan7  :: [Int] -> [Int]
+-- filterLessThan7 [] = []
+-- filterLessThan7 (x:xs) = [i| i <- x:xs, i < 7 ]
+
+-- incrementBy3 :: [Int] -> [Int]
+-- incrementBy3 [] = []
+-- incrementBy3 (x : xs) = [i + 3 | i <- [x]] ++ incrementBy3 xs
+-- data BinaryTree a = EmptyTree | Node a (BinaryTree a) (BinaryTree a)
+
+-- balance :: [a] -> BinaryTree a
+
+-- balance [] = EmptyTree
+-- balance xs = Node mid (balance left) (balance right)
+--   where
+--     (left, mid : right) = splitAt (length xs `div` 2) xs
+
+-- data Shape = Circle Float | Rect Float Float deriving (Show)
+
+-- scale :: Float -> Shape -> Shape
+-- scale x (Circle r) = Circle (r * x)
+-- scale x (Rect l w) = Rect (l * x) (w * x)
 
 -- week 3
 -- facSum :: Int -> Int
