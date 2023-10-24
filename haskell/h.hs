@@ -1,11 +1,30 @@
 main :: IO ()
-main = print (mystery [1, 2, 3])
-
-mystery xs = foldr (++) [] (map sing xs)
-  where
-    sing x = [x]
+main = print ([4783])
 
 -- week 4
+
+-- altMap :: (a -> b) -> (a -> b) -> [a] -> [b]
+-- altMap _ _ [] = []
+-- altMap f g (x : xs) = f x : altMap g f xs
+
+-- luhn :: [Int] -> Bool
+-- luhn xs
+--   | sum (altMap (\x -> if x > 9 then x - 9 else x) (* 2) (reverse xs)) `mod` 10 == 0 = True
+--   | otherwise = False
+
+-- altMap :: (a -> b) -> (a -> b) -> [a] -> [b]
+-- altMap _ _ [] = []
+-- altMap f g (x : xs) = f x : altMap g f xs
+
+-- luhn :: [Int] -> Bool
+-- luhn xs
+--   | sum (altMap (* 2) (\x -> if x > 9 then x - 9 else x) (reverse xs)) `mod` 10 == 0 = True
+--   | otherwise = False
+
+-- mystery xs = foldr (++) [] (map sing xs)
+--   where
+--     sing x = [x]
+
 -- a . map (+ 3) xs
 -- b . filter (> 7) xs
 -- c . concat (map (\x -> map (\y -> (x, y)) ys) xs)
