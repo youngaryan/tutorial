@@ -322,7 +322,7 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
         case PAUSED:
           // When an image is in PAUSED state, but the camera is not PAUSED, it has been detected,
           // but not yet tracked.
-          String text = String.format("Detected Image %d", augmentedImage.getIndex());
+          String text = String.format("Detected Image %d", augmentedImage.getName());
           messageSnackbarHelper.showMessage(this, text);
           break;
 
@@ -405,7 +405,7 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
   }
 
   private Bitmap loadAugmentedImageBitmap() {
-    try (InputStream is = getAssets().open("zowe.png")) {
+    try (InputStream is = getAssets().open("default.jpg")) {
       return BitmapFactory.decodeStream(is);
     } catch (IOException e) {
       Log.e(TAG, "IO exception loading augmented image bitmap.", e);
